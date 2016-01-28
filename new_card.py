@@ -1,11 +1,11 @@
-import sys
-import db_connection
 import card_repository
 from card import Card
 from get_timestamp import get_timestamp
 
 def read_input():
+
     lines = []
+
     while True:
         try:
             line = input('>>> ')
