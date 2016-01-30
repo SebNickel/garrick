@@ -1,7 +1,5 @@
 # garrick
-Command line flashcard app
-
-Written in Python 3, uses MySQL.
+Command line flashcard app written in Python 3.
 
 Named after Jay Garrick, aka The Flash, first of his monicker.
 

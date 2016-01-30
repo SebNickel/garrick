@@ -1,12 +1,16 @@
 from getpass import getpass
 from card import Card
+from unescape import unescape
 from get_timestamp import get_timestamp
 
 def review_card(card):
     
-    print(card.front)
+    front = unescape(card.front)
+    back = unescape(card.back)
+
+    print(front)
     getpass('[Enter to flip the card.]')
-    print(card.back)
+    print(back)
 
     while True:
         score = input('Score yourself from 0 to 5: ')

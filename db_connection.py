@@ -1,15 +1,13 @@
-from mysql.connector import MySQLConnection, Error
-from db_config import read_db_config
+import sqlite3
 
-def connect():
+def connect(db_file):
     try:
-        db_config = read_db_config()
-        conn = MySQLConnection(**db_config)
+        conn = sqlite3.connect(db_file)
         cursor = conn.cursor()
         
         return conn, cursor
 
-    except Error as error:
+    except sqlite3.Error as error:
         raise Exception(error)
     
 def disconnect(conn, cursor):

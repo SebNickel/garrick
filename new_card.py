@@ -39,7 +39,7 @@ def menu(conn, cursor, two_way_card):
 
 def new_card(conn, cursor, two_way_card):
 
-    print('[Ctrl+D to stop, Ctrl+C to discard this card.]')
+    print('[Ctrl+D: Finish current side. Ctrl+C: Discard this card and get a menu.]')
 
     if two_way_card:
         print('Side 1:')

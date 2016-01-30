@@ -1,28 +1,59 @@
 from card import Card
 
-def insert (conn, cursor, card):
+def create_table_if_not_exists(conn, cursor):
+
+    query = """
+        CREATE TABLE IF NOT EXISTS cards (
+            front TEXT NOT NULL,
+            back TEXT NOT NULL,
+            score INTEGER NOT NULL,
+            last_viewed TIMESTAMP NOT NULL
+        )
+    """
+
+    cursor.execute(query)
+    conn.commit()
+
+def check_if_empty(cursor):
+
+    query = """
+        SELECT EXISTS(
+            SELECT 1
+            FROM cards
+        )
+    """
+
+    cursor.execute(query)
+    query_result = cursor.fetchone()
+
+    if query_result[0] == 0:
+        return True
+    else:
+        return False
+
+def insert(conn, cursor, card):
 
     args = card.to_tuple()
 
     query = """
         INSERT INTO cards (front, back, score, last_viewed)
-        VALUES ({!r}, {!r}, {}, {!r})
-    """.format(*args)
+        VALUES (?, ?, ?, ?)
+    """
     
-    cursor.execute(query)
+    cursor.execute(query, args)
     conn.commit()
 
-def get_random(conn, cursor, score):
+def get_random(cursor, score):
 
     query = """
         SELECT *
         FROM cards
-        WHERE score = {}
-        ORDER BY RAND()
+        WHERE score = ?
+        ORDER BY RANDOM()
         LIMIT 1
-    """.format(score)
+    """
 
-    cursor.execute(query)
+    cursor.execute(query, str(score))
     row = cursor.fetchone()
 
     if row == None:
@@ -34,14 +65,30 @@ def get_random(conn, cursor, score):
 def update(conn, cursor, card):
 
     args = card.to_tuple()
+    reordered_args = (args[2], args[3], args[0], args[1])
 
     query = """
         UPDATE cards
-        SET score = {2},
-            last_viewed = {3!r}
-        WHERE front = {0!r}
-        AND back = {1!r}
-    """.format(*args)
+        SET score = ?,
+            last_viewed = ?
+        WHERE front = ?
+        AND back = ?
+    """
 
-    cursor.execute(query)
+    cursor.execute(query, reordered_args)
+    conn.commit()
+
+def delete(conn, cursor, card):
+
+    args = card.to_tuple()
+
+    query = """
+        DELETE FROM cards
+        WHERE front = ?
+        AND back = ?
+        AND score = ?
+        AND last_viewed = ?
+    """
+
+    cursor.execute(query, args)
     conn.commit()

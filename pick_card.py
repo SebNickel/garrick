@@ -21,6 +21,6 @@ def pick_card(conn, cursor):
         else:
             score = 5
 
-        card = card_repository.get_random(conn, cursor, score)
+        card = card_repository.get_random(cursor, score)
 
     return card
