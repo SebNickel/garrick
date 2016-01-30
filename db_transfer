@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+import sqlite3
+
+conn = sqlite3.connect('garrick.db')
+cursor = conn.cursor()
+
+query = """
+    SELECT *
+    FROM cards
+"""
+
+cursor.execute(query)
+rows = cursor.fetchall()
+
+for row in rows:
+    print('FRONT')
+    print(row[0])
+    print('BACK')
+    print(row[1])
+    print('SCORE')
+    print(row[2])
+    print('LAST_VIEWED')
+    print(row[3])
+    input()
+
+cursor.close()
+conn.close()

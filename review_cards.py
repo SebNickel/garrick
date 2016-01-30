@@ -5,9 +5,10 @@ import card_repository
 
 def review_cards(conn, cursor):
 
-    print('[Ctrl+C to quit.]')
-    
     while True:
+        
+        print('[Ctrl+C to quit.]')
+
         try:
             card = pick_card(conn, cursor)
             updated_card = review_card(card)
