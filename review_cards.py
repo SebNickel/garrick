@@ -9,9 +9,19 @@ def review_cards(conn, cursor):
     
     while True:
         try:
-            row = pick_card(conn, cursor)
-            updated_card = review_card(row)
-            card_repository.update(conn, cursor, updated_card)   
+            card = pick_card(conn, cursor)
+            updated_card = review_card(card)
+
+            if updated_card == None:
+                card_repository.delete(conn, cursor, card)
+                print('Deleted.')
+                table_is_empty = card_repository.check_if_empty(cursor)
+                if table_is_empty:
+                    print('You have no more cards!')
+                    break
+            else:
+                card_repository.update(conn, cursor, updated_card)   
+
         except KeyboardInterrupt:
             print()
             break

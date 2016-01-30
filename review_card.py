@@ -1,7 +1,24 @@
 from getpass import getpass
 from card import Card
+import card_repository
 from unescape import unescape
 from get_timestamp import get_timestamp
+
+def menu(card):
+    
+    print('e: Edit this card. (COMING SOON)')
+    print('d: Delete this card.')
+
+    while True:
+        selection = input('[e/d]: ')
+        if selection in ['e', 'd']:
+            break
+
+    if selection == 'e':
+        print('COMING SOON!')
+        return card
+    elif selection == 'd':
+        return None
 
 def review_card(card):
     
@@ -13,7 +30,9 @@ def review_card(card):
     print(back)
 
     while True:
-        score = input('Score yourself from 0 to 5: ')
+        score = input("Score yourself from 0 to 5, or enter 'o' for options: ")
+        if score == 'o':
+            return menu(card)
         if score.isdigit() and int(score) in list(range(6)):
             break
     
