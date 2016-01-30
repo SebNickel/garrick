@@ -29,10 +29,11 @@ def pick_db_file():
         for i in range(len(db_files)):
             print('{}. {}'.format(i + 1, db_files[i]))
 
-        db_number = input('Enter the number of the database to use: ')
-
-        while not (db_number.isdigit and db_number in range(1, len(db_files))):
-            db_number = input('Invalid selection. Try again: ')
+        while True:
+            selection = input('Enter the number of the database to use: ')
+            if selection.isdigit() and int(selection) in range(1, len(db_files)):
+                db_number = int(selection)
+                break
 
         selected_db_file = db_files[db_number - 1]
 
