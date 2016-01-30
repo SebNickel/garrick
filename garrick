@@ -20,8 +20,8 @@ if len(sys.argv) == 1:
         print('\t-n2\tcreate a single two-way card')
         print('\t-N\tcreate multiple cards, starting in one-way mode.')
         print('\t-N2\tcreate multiple cards, starting in two-way mode.')
-        sys.exit()
-    review_cards(conn, cursor)
+    else:
+        review_cards(conn, cursor)
 elif sys.argv[1] == '-n':
     new_card(conn, cursor, False)
 elif sys.argv[1] == '-n2':
