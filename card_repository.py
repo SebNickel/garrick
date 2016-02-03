@@ -78,6 +78,25 @@ def update(conn, cursor, card):
     cursor.execute(query, reordered_args)
     conn.commit()
 
+def replace(conn, cursor, old_card, new_card):
+
+    args = new_card.to_tuple() + old_card.to_tuple()
+
+    query = """
+        UPDATE cards
+        SET front = ?,
+            back = ?,
+            score = ?,
+            last_viewed = ?
+        WHERE front = ?
+        AND back = ?
+        AND score = ?
+        AND last_viewed = ?
+    """
+    
+    cursor.execute(query, args)
+    conn.commit()
+
 def delete(conn, cursor, card):
 
     args = card.to_tuple()

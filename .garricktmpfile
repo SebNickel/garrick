@@ -1,0 +1,24 @@
+EDIT THE CONTENTS OF THE CARD, SAVE IT AND QUIT THE EDITOR.
+[FRONT]
+Where is the configuration file for APT and dselect? What's in it? How might you go about modifying it?
+[BACK]
+/etc/apt/apt.conf
+
+(and there's /etc/apt/sources.list, of course)
+
+Contained options are grouped by curly braces, e.g.:
+
+APT
+{
+	Get
+	{
+	    Download-Only "true";
+	};
+};
+
+is equivalent to setting the --download-only option permanently.
+
+Other than "man apt.conf", you can work from the example file
+	/usr/share/doc/apt/examples/apt.conf
+[SCORE]
+0

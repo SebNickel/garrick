@@ -21,7 +21,7 @@ def review_cards(conn, cursor):
                     print('You have no more cards!')
                     break
             else:
-                card_repository.update(conn, cursor, updated_card)   
+                card_repository.replace(conn, cursor, card, updated_card)   
 
         except KeyboardInterrupt:
             print()

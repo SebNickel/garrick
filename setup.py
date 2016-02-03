@@ -15,6 +15,7 @@ setup(
         'review_card', 
         'review_cards', 
         'garrick', 
+        'edit',
         'unescape'
     ],
     include_package_data = True,

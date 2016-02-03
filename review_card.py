@@ -3,6 +3,7 @@ from card import Card
 import card_repository
 from unescape import unescape
 from get_timestamp import get_timestamp
+from edit import edit
 
 def menu(card):
     
@@ -15,8 +16,7 @@ def menu(card):
             break
 
     if selection == 'e':
-        print('COMING SOON!')
-        return card
+        return edit(card)
     elif selection == 'd':
         return None
 
@@ -30,7 +30,7 @@ def review_card(card):
     print(back)
 
     while True:
-        score = input("Score yourself from 0 to 5, or enter 'o' for options: ")
+        score = input("[Score yourself from 0 to 5, or enter 'o' for options:] ")
         if score == 'o':
             return menu(card)
         if score.isdigit() and int(score) in list(range(6)):
