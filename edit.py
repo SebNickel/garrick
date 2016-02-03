@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import os
 import subprocess
 from card import Card
@@ -7,6 +6,10 @@ from getpass import getpass
 
 editor = 'vim'
 tmp_file = '.garricktmpfile'
+
+def fix_your_edits(card):
+
+    return edit(card)
 
 def edit(card):
 
@@ -25,6 +28,7 @@ def edit(card):
         lines = tmp.readlines()
         
     os.remove(tmp_file)
+
     for i in range(len(lines)):
         lines[i] = lines[i].strip('\n').strip('\r')
 
@@ -53,47 +57,15 @@ def edit(card):
 
     score_string = lines[score_index + 1]
 
-    if not score_string.isdigit():
-        print('Error: The score is no longer an integer.')
-        getpass('Hit Enter to go fix it.')
-        faulty_card = Card(front, back, 0, last_viewed)
-        return fix_your_edits(faulty_card)
-
-    score = int(score_string)
-
-    if not int(score) in range(6):
+    if (not score_string.isdigit()) or (not int(score) in range(6)):
         print('Error: {} is not a valid score.'.format(score))
         print('Valid scores are 0, 1, 2, 3, 4, 5.')
         getpass('Hit Enter to go fix it.')
-        faulty_card = Card(front, back, score, last_viewed)
+        faulty_card = Card(front, back, 0, last_viewed)
         return fix_your_edits(card)
+    
+    score = int(score_string)
 
     edited_card = Card(front, back, score, last_viewed)
 
     return edited_card
-
-def fix_your_edits(card):
-
-    return edit(card)
-
-if __name__ == '__main__':
-
-    card = Card('Hello World', 'This is a test.\nHere\'s another line.', 5, '2016-02-02 12:00')
-    
-    edited_card = edit(card)
-
-    print('Front:')
-    print()
-    print(edited_card.front)
-    print()
-    print('Back:')
-    print()
-    print(edited_card.back)
-    print()
-    print('Score:')
-    print()
-    print(edited_card.score)
-    print()
-    print('Last viewed:')
-    print()
-    print(edited_card.last_viewed)

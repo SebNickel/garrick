@@ -62,22 +62,6 @@ def get_random(cursor, score):
         card = Card(*row)
         return card
 
-def update(conn, cursor, card):
-
-    args = card.to_tuple()
-    reordered_args = (args[2], args[3], args[0], args[1])
-
-    query = """
-        UPDATE cards
-        SET score = ?,
-            last_viewed = ?
-        WHERE front = ?
-        AND back = ?
-    """
-
-    cursor.execute(query, reordered_args)
-    conn.commit()
-
 def replace(conn, cursor, old_card, new_card):
 
     args = new_card.to_tuple() + old_card.to_tuple()

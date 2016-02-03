@@ -7,7 +7,7 @@ from edit import edit
 
 def menu(card):
     
-    print('e: Edit this card. (COMING SOON)')
+    print('e: Edit this card.')
     print('d: Delete this card.')
 
     while True:
