@@ -6,10 +6,11 @@ from get_timestamp import get_timestamp
 from getpass import getpass
 
 editor = 'vim'
+tmp_file = '.garricktmpfile'
 
 def edit(card):
 
-    with open('.garricktmpfile', 'w') as tmp:
+    with open(tmp_file, 'w') as tmp:
         tmp.write('EDIT THE CONTENTS OF THE CARD, SAVE IT AND QUIT THE EDITOR.\n')
         tmp.write('[FRONT]\n')
         tmp.write(card.front + '\n')
@@ -18,11 +19,12 @@ def edit(card):
         tmp.write('[SCORE]\n')
         tmp.write(str(card.score))
 
-    subprocess.run([editor, '.garricktmpfile'])
+    subprocess.run([editor,tmp_file])
 
-    with open('.garricktmpfile', 'r') as tmp:
+    with open(tmp_file, 'r') as tmp:
         lines = tmp.readlines()
         
+    os.remove(tmp_file)
     for i in range(len(lines)):
         lines[i] = lines[i].strip('\n').strip('\r')
 
