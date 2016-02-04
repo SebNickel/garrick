@@ -8,7 +8,7 @@ def read_input():
 
     while True:
         try:
-            line = input('>>> ')
+            line = input('] ')
             lines.append(line)
         except KeyboardInterrupt:
             return None

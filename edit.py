@@ -57,7 +57,7 @@ def edit(card):
 
     score_string = lines[score_index + 1]
 
-    if (not score_string.isdigit()) or (not int(score) in range(6)):
+    if (not score_string.isdigit()) or (not int(score_string) in range(6)):
         print('Error: {} is not a valid score.'.format(score))
         print('Valid scores are 0, 1, 2, 3, 4, 5.')
         getpass('Hit Enter to go fix it.')

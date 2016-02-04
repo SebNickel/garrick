@@ -49,7 +49,7 @@ def get_random(cursor, score):
         SELECT *
         FROM cards
         WHERE score = ?
-        ORDER BY RANDOM()
+        ORDER BY last_viewed
         LIMIT 1
     """
 
