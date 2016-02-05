@@ -8,7 +8,7 @@ If you have git, python3, pip, and setuptools:
 ```
 $ git clone https://github.com/SebNickel/garrick.git
 $ cd garrick
-# pip install .
+# python setup.py install
 ```
 
 ### Todo
