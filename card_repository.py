@@ -43,7 +43,7 @@ def insert(conn, cursor, card):
     cursor.execute(query, args)
     conn.commit()
 
-def get_random(cursor, score):
+def select(cursor, score):
 
     query = """
         SELECT *
@@ -61,25 +61,6 @@ def get_random(cursor, score):
     else:
         card = Card(*row)
         return card
-
-def replace(conn, cursor, old_card, new_card):
-
-    args = new_card.to_tuple() + old_card.to_tuple()
-
-    query = """
-        UPDATE cards
-        SET front = ?,
-            back = ?,
-            score = ?,
-            last_viewed = ?
-        WHERE front = ?
-        AND back = ?
-        AND score = ?
-        AND last_viewed = ?
-    """
-    
-    cursor.execute(query, args)
-    conn.commit()
 
 def delete(conn, cursor, card):
 
