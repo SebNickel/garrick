@@ -4,7 +4,7 @@ Command line flashcard app written in Python 3.
 Named after Jay Garrick, aka The Flash, first of his monicker.
 
 ### Installing
-If you have git, python3, pip, and setuptools:
+If you have git, python3, and setuptools:
 ```
 $ git clone https://github.com/SebNickel/garrick.git
 $ cd garrick
