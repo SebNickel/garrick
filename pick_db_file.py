@@ -19,7 +19,7 @@ def pick_db_file():
 
         while True:
             selection = input('Enter the number of the database file to use: ')
-            if selection.isdigit() and int(selection) in range(1, len(db_files)):
+            if selection.isdigit() and int(selection) in range(1, len(db_files) + 1):
                 db_number = int(selection)
                 break
 
