@@ -1,10 +1,10 @@
 import os
 import subprocess
+from getpass import getpass
 from card import Card
 from get_timestamp import get_timestamp
-from getpass import getpass
+from parse_config_file import parse_editor
 
-editor = 'vim'
 tmp_file = '.garricktmpfile'
 
 def fix_your_edits(card):
@@ -12,6 +12,8 @@ def fix_your_edits(card):
     return edit(card)
 
 def edit(card):
+
+    editor = parse_editor()
 
     with open(tmp_file, 'w') as tmp:
         tmp.write('EDIT THE CONTENTS OF THE CARD, SAVE IT AND QUIT THE EDITOR.\n')
@@ -22,7 +24,7 @@ def edit(card):
         tmp.write('[SCORE]\n')
         tmp.write(str(card.score))
 
-    subprocess.run([editor,tmp_file])
+    subprocess.run([editor, tmp_file])
 
     with open(tmp_file, 'r') as tmp:
         lines = tmp.readlines()

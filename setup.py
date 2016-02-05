@@ -1,24 +1,26 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name = 'garrick',
-    version = '1.0.dev1',
+    version = '1.0.dev2',
     py_modules = [
         'card', 
         'card_repository', 
         'db_connection', 
+        'edit',
+        'garrick',
         'get_timestamp', 
+        'load_config_file',
         'new_card', 
         'new_cards', 
+        'parse_config_file',
         'pick_card', 
         'pick_db_file', 
         'review_card', 
         'review_cards', 
-        'garrick', 
-        'edit',
         'unescape'
     ],
-    include_package_data = True,
+    data_files = [('', ['LICENSE.txt', 'README.md', 'garrick.conf.example'])],
     entry_points = {
         'console_scripts': [ 'garrick = garrick:main' ]
     },

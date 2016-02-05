@@ -1,0 +1,8 @@
+[database_files]
+linux.db
+spanish.db
+economics.db
+pokemon.db
+
+[config]
+editor = vim
