@@ -1,4 +1,3 @@
-import card_repository
 from card import Card
 from get_timestamp import get_timestamp
 
@@ -31,7 +30,7 @@ def menu(conn, cursor, two_way_card):
             break
     
     if selection == 'q':
-        return None
+        return None, None
     
     if selection == 'd':
         return new_card(conn, cursor, two_way_card)
@@ -64,12 +63,5 @@ def new_card(conn, cursor, two_way_card):
     last_viewed = get_timestamp()
 
     new_card = Card(front, back, 0, last_viewed)
-    card_repository.insert(conn, cursor, new_card)
 
-    if two_way_card:
-        flipped_card = Card(back, front, 0, last_viewed)
-        card_repository.insert(conn, cursor, flipped_card)
-
-    print('Saved.')
-
-    return two_way_card
+    return new_card, two_way_card

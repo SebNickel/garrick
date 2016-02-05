@@ -17,20 +17,14 @@ def main():
         table_is_empty = card_repository.check_if_empty(cursor)
         if table_is_empty:
             print("You don't have any cards yet.")
-            print('Create some cards by launching garrick with one of the following flags first:')
-            print('\t-n\tcreate a single one-way card')
-            print('\t-n2\tcreate a single two-way card')
-            print('\t-N\tcreate multiple cards, starting in one-way mode.')
-            print('\t-N2\tcreate multiple cards, starting in two-way mode.')
+            print('Create some cards by launching garrick with one of the following options first:')
+            print('\t-n\tcreate multiple cards, starting in one-way mode.')
+            print('\t-n2\tcreate multiple cards, starting in two-way mode.')
         else:
             review_cards(conn, cursor)
     elif sys.argv[1] == '-n':
-        new_card(conn, cursor, False)
-    elif sys.argv[1] == '-n2':
-        new_card(conn, cursor, True)
-    elif sys.argv[1] == '-N':
         new_cards(conn, cursor, False)
-    elif sys.argv[1] == '-N2':
+    elif sys.argv[1] == '-n2':
         new_cards(conn, cursor, True)
     else:
         print('Usage info coming soon.')
