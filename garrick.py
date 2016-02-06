@@ -7,7 +7,7 @@ import card_repository
 from review_cards import review_cards
 from new_card import new_card
 from new_cards import new_cards
-import browse
+import review
 from colored_output import print_info, print_instruction, print_error
 
 def main():
@@ -31,7 +31,7 @@ def main():
             print_instruction('\t-s\tcreate cards starting in single-line and one-way mode.')
             print_instruction('\t-s2\tcreate cards stating in single-line and two-way mode.')
         else:
-            review_cards(conn, cursor)
+            review.review(conn, cursor)
     elif sys.argv[1] == '-n':
         new_cards(conn, cursor, False, False)
     elif sys.argv[1] == '-n2':
@@ -41,17 +41,17 @@ def main():
     elif sys.argv[1] == '-s2':
         new_cards(conn, cursor, True, True)
     elif sys.argv[1] == '-b':
-        browse.browse_by_regex(conn, cursor) 
+        review.browse_by_regex(conn, cursor) 
     elif sys.argv[1] == '-bf':
-        browse.browse_by_regex_front(conn, cursor) 
+        review.browse_by_regex_front(conn, cursor) 
     elif sys.argv[1] == '-bb':
-        browse.browse_by_regex_back(conn, cursor) 
+        review.browse_by_regex_back(conn, cursor) 
     elif sys.argv[1] == '-bs':
-        browse.browse_by_score(conn, cursor)
+        review.browse_by_score(conn, cursor)
     elif sys.argv[1] == '-bl':
-        browse.browse_by_last_viewed(conn, cursor)
+        review.browse_by_last_viewed(conn, cursor)
     elif sys.argv[1] == '-br':
-        browse.browse_by_last_viewed_reverse(conn, cursor)
+        review.browse_by_last_viewed_reverse(conn, cursor)
     else:
         print('Usage info coming soon.')
     

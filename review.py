@@ -1,28 +1,33 @@
 import card_repository
 from card import Card
+from iterators import review_iterator, browsing_iterator
 from review_card import review_card
-from colored_output import print_info, print_error, print_instruction, colored_prompt, colored_getpass
+from colored_output import print_info, print_instruction, print_error, colored_prompt
 
-def browse(conn, cursor, results):
-
-    count = len(results)
+def iterate(conn, cursor, iterator, count):
 
     if count == 0:
         print_error('No results.')
     elif count == 1:
-        print_info('[1 RESULT.]')
+        print_info('[1 CARD.]')
     else:
-        print_info('[{} RESULTS.]'.format(count))
+        print_info('[{} CARDS.]'.format(count))
 
     try:
-        for row in results:
+        for card in iterator:
 
-            card = Card(*row)
+            print_instruction('[Ctrl+C to quit.]')
+
             updated_card = review_card(card)
 
             if updated_card == None:
                 card_repository.delete(conn, cursor, card)
+                # Not an error, but I feel this should be red.
                 print_error('DELETED.')
+                table_is_empty = card_repository.check_if_empty(cursor)
+                if table_is_empty:
+                    print_info('You have no more cards!')
+                    break
             else:
                 card_repository.insert(conn, cursor, updated_card)
                 card_repository.delete(conn, cursor, card)
@@ -34,6 +39,16 @@ def browse(conn, cursor, results):
 
     except KeyboardInterrupt:
         print()
+
+def review(conn, cursor):
+    count = card_repository.count(cursor)
+    iterator = review_iterator(conn, cursor)
+    iterate(conn, cursor, iterator, count)
+
+def browse(conn, cursor, results):
+    count = len(results)
+    iterator = browsing_iterator(results)
+    iterate(conn, cursor, iterator, count)
 
 def browse_by_regex(conn, cursor):
     regex = colored_prompt('Enter regular expression: ')

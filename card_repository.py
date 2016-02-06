@@ -161,3 +161,16 @@ def delete(conn, cursor, card):
 
     cursor.execute(query, args)
     conn.commit()
+
+def count(cursor):
+    
+    query = """
+        SELECT count(*)
+        FROM cards
+    """
+
+    cursor.execute(query)
+
+    result = cursor.fetchone()
+
+    return int(result[0])

@@ -1,4 +1,5 @@
 import card_repository
+from card import Card
 from new_card import new_card
 from colored_output import print_info
 
