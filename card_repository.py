@@ -62,7 +62,22 @@ def select(cursor, score):
         card = Card(*row)
         return card
 
-def search_front(cursor, regex):
+def select_by_regex(cursor, regex):
+
+    query = """
+        SELECT *
+        FROM cards
+        WHERE MATCHES(?, front)
+        OR MATCHES(?, back)
+    """
+
+    cursor.execute(query, (regex, regex))
+
+    results = cursor.fetchall()
+
+    return results
+
+def select_by_regex_front(cursor, regex):
 
     query = """
         SELECT *
@@ -76,7 +91,7 @@ def search_front(cursor, regex):
 
     return results
 
-def search_back(cursor, regex):
+def select_by_regex_back(cursor, regex):
 
     query = """
         SELECT *
@@ -90,16 +105,43 @@ def search_back(cursor, regex):
 
     return results
 
-def search_both_sides(cursor, regex):
+def select_by_score(cursor, score):
 
     query = """
         SELECT *
         FROM cards
-        WHERE MATCHES(?, front)
-        OR MATCHES(?, back)
+        WHERE score = ?
     """
 
-    cursor.execute(query, (regex, regex))
+    cursor.execute(query, (score,))
+
+    results = cursor.fetchall()
+
+    return results
+
+def select_by_last_viewed(cursor):
+
+    query = """
+        SELECT *
+        FROM cards
+        ORDER BY last_viewed
+    """
+
+    cursor.execute(query)
+
+    results = cursor.fetchall()
+
+    return results
+
+def select_by_last_viewed_reverse(cursor):
+
+    query = """
+        SELECT *
+        FROM cards
+        ORDER BY last_viewed DESC
+    """
+
+    cursor.execute(query)
 
     results = cursor.fetchall()
 

@@ -2,8 +2,9 @@ from setuptools import setup
 
 setup(
     name = 'garrick',
-    version = '1.0.dev2',
+    version = '1.0.dev3',
     py_modules = [
+        'browse',
         'card', 
         'card_repository', 
         'db_connection', 
@@ -18,7 +19,6 @@ setup(
         'pick_db_file', 
         'review_card', 
         'review_cards', 
-        'search',
         'unescape'
     ],
     data_files = [('', ['LICENSE.txt', 'README.md', 'garrick.conf.example'])],
