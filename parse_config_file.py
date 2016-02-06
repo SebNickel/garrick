@@ -10,7 +10,16 @@ def get_config():
     config_file = os.path.join(garrick_dir, config_file_name)
 
     config = configparser.ConfigParser(allow_no_value = True)
-    config.read(config_file)
+
+    try:
+        config.read(config_file)
+    except Exception as exception:
+        print_error('Something is wrong with your config file.')
+        print_error('ConfigParser has thrown the following exception:')
+        print()
+        print(exception)
+        print()
+        write_example_config()
 
     return config
 

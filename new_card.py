@@ -1,6 +1,6 @@
 from card import Card
 from get_timestamp import get_timestamp
-from colored_output import print_info, print_instruction, colored_prompt, colored_getpass
+from colored_output import print_side, print_instruction, colored_prompt, colored_getpass
 
 prompt = '] '
 
@@ -56,18 +56,18 @@ def new_card(conn, cursor, two_way_card, single_line_mode):
         print_instruction('[Ctrl+D: Finish current side. Ctrl+C: Discard this card and get a menu.]')
 
     if two_way_card:
-        print_info('Side 1:')
+        print_side('Side 1:')
     else:
-        print_info('Front:')
+        print_side('Front:')
         
     front = read_input(single_line_mode)
     if front == None:
         return menu(conn, cursor, two_way_card, single_line_mode)
 
     if two_way_card:
-        print_info('Side 2:')
+        print_side('Side 2:')
     else:
-        print_info('Back:')
+        print_side('Back:')
 
     back = read_input(single_line_mode)
     if back == None:

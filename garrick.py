@@ -13,7 +13,7 @@ from colored_output import print_info, print_instruction, print_error
 def main():
 
     # Initialise colorama
-    init(autoreset = True)
+    init()
 
     db_file = pick_db_file()
     conn, cursor = db_connection.connect(db_file)
@@ -26,10 +26,10 @@ def main():
             print_instruction(
                 'Create some cards by launching garrick with one of the following options first:'
             )
-            print_info('\t-n\tcreate cards starting in one-way mode.')
-            print_info('\t-n2\tcreate cards starting in two-way mode.')
-            print_info('\t-s\tcreate cards starting in single-line and one-way mode.')
-            print_info('\t-s2\tcreate cards stating in single-line and two-way mode.')
+            print_instruction('\t-n\tcreate cards starting in one-way mode.')
+            print_instruction('\t-n2\tcreate cards starting in two-way mode.')
+            print_instruction('\t-s\tcreate cards starting in single-line and one-way mode.')
+            print_instruction('\t-s2\tcreate cards stating in single-line and two-way mode.')
         else:
             review_cards(conn, cursor)
     elif sys.argv[1] == '-n':
