@@ -62,6 +62,49 @@ def select(cursor, score):
         card = Card(*row)
         return card
 
+def search_front(cursor, regex):
+
+    query = """
+        SELECT *
+        FROM cards
+        WHERE MATCHES(?, front)
+    """
+
+    cursor.execute(query, (regex,))
+
+    results = cursor.fetchall()
+
+    return results
+
+def search_back(cursor, regex):
+
+    query = """
+        SELECT *
+        FROM cards
+        WHERE MATCHES(?, back)
+    """
+
+    cursor.execute(query, (regex,))
+
+    results = cursor.fetchall()
+
+    return results
+
+def search_both_sides(cursor, regex):
+
+    query = """
+        SELECT *
+        FROM cards
+        WHERE MATCHES(?, front)
+        OR MATCHES(?, back)
+    """
+
+    cursor.execute(query, (regex, regex))
+
+    results = cursor.fetchall()
+
+    return results
+
 def delete(conn, cursor, card):
 
     args = card.to_tuple()

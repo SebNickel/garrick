@@ -18,6 +18,7 @@ setup(
         'pick_db_file', 
         'review_card', 
         'review_cards', 
+        'search',
         'unescape'
     ],
     data_files = [('', ['LICENSE.txt', 'README.md', 'garrick.conf.example'])],

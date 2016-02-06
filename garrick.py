@@ -6,6 +6,7 @@ import card_repository
 from review_cards import review_cards
 from new_card import new_card
 from new_cards import new_cards
+import search
 
 def main():
 
@@ -32,6 +33,12 @@ def main():
         new_cards(conn, cursor, False, True)
     elif sys.argv[1] == '-s2':
         new_cards(conn, cursor, True, True)
+    elif sys.argv[1] == '-qf':
+        search.search_front(conn, cursor) 
+    elif sys.argv[1] == '-qb':
+        search.search_back(conn, cursor) 
+    elif sys.argv[1] == '-q':
+        search.search_both_sides(conn, cursor) 
     else:
         print('Usage info coming soon.')
     

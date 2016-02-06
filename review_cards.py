@@ -15,14 +15,14 @@ def review_cards(conn, cursor):
 
             if updated_card == None:
                 card_repository.delete(conn, cursor, card)
-                print('Deleted.')
+                print('DELETED.')
                 table_is_empty = card_repository.check_if_empty(cursor)
                 if table_is_empty:
                     print('You have no more cards!')
                     break
             else:
-                card_repository.delete(conn, cursor, card)   
                 card_repository.insert(conn, cursor, updated_card)   
+                card_repository.delete(conn, cursor, card)   
 
         except KeyboardInterrupt:
             print()
