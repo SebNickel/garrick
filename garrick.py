@@ -18,14 +18,20 @@ def main():
         if table_is_empty:
             print("You don't have any cards yet.")
             print('Create some cards by launching garrick with one of the following options first:')
-            print('\t-n\tcreate multiple cards, starting in one-way mode.')
-            print('\t-n2\tcreate multiple cards, starting in two-way mode.')
+            print('\t-n\tcreate cards starting in one-way mode.')
+            print('\t-n2\tcreate cards starting in two-way mode.')
+            print('\t-s\tcreate cards starting in single-line and one-way mode.')
+            print('\t-s2\tcreate cards stating in single-line and two-way mode.')
         else:
             review_cards(conn, cursor)
     elif sys.argv[1] == '-n':
-        new_cards(conn, cursor, False)
+        new_cards(conn, cursor, False, False)
     elif sys.argv[1] == '-n2':
-        new_cards(conn, cursor, True)
+        new_cards(conn, cursor, True, False)
+    elif sys.argv[1] == '-s':
+        new_cards(conn, cursor, False, True)
+    elif sys.argv[1] == '-s2':
+        new_cards(conn, cursor, True, True)
     else:
         print('Usage info coming soon.')
     
