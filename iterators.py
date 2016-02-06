@@ -8,9 +8,8 @@ def review_iterator(conn, cursor):
         card = pick_card(conn, cursor)
 
 def browsing_iterator(rows):
-    i = 0
-    card = Card(*rows[i])
+    i = -1
     while i < len(rows):
+        card = Card(*rows[i])
         yield card
         i += 1
-        card = Card(*rows[i])

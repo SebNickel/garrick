@@ -43,6 +43,18 @@ def insert(conn, cursor, card):
     cursor.execute(query, args)
     conn.commit()
 
+def insert_flipped_card(conn, cursor, card):
+
+    args = (card.back, card.front, card.score, card.last_viewed)
+
+    query = """
+        INSERT INTO cards (front, back, score, last_viewed)
+        VALUES (?, ?, ?, ?)
+    """
+
+    cursor.execute(query, args)
+    conn.commit()
+
 def select(cursor, score):
 
     query = """
@@ -146,21 +158,6 @@ def select_by_last_viewed_reverse(cursor):
     results = cursor.fetchall()
 
     return results
-
-def update_flipped_card(conn, cursor, card, updated_card):
-
-    args = (updated_card.back, updated_card.front, card.back, card.front)
-
-    query = """
-        UPDATE cards
-        SET front = ?,
-            back = ?
-        WHERE front = ?
-        AND back = ?
-    """
-
-    cursor.execute(query, args)
-    conn.commit()
 
 def delete(conn, cursor, card):
 

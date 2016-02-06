@@ -1,27 +1,22 @@
 import card_repository
 from card import Card
+from edit import edit
 from iterators import review_iterator, browsing_iterator
 from review_card import review_card
 from colored_output import print_info, print_instruction, print_error, colored_prompt
 
 def include_flipped_card(cursor, card):
 
-    is_two_way_card = card_repository.is_two_way_card(cursor, card)
-
-    if is_two_way_card:
-
-        print_info('This is a two-way card.')
-        print_info('Should your changes also affect the flipped version of this card?')
-        while True:
-            answer = colored_prompt('[y/n]: ')
-            if answer in ['y', 'n']:
-                break
-        if answer == 'y':
-            return True
-        else:
-            return False
-
-    return False
+    print_info('This is a two-way card.')
+    print_info('Should your changes also affect the flipped version of this card?')
+    while True:
+        answer = colored_prompt('[y/n]: ')
+        if answer in ['y', 'n']:
+            break
+    if answer == 'y':
+        return True
+    else:
+        return False
 
 def iterate(conn, cursor, iterator, count):
 
@@ -39,7 +34,9 @@ def iterate(conn, cursor, iterator, count):
 
             updated_card, contents_changed = review_card(card)
 
-            if contents_changed:
+            is_two_way_card = card_repository.is_two_way_card(cursor, card)
+
+            if is_two_way_card and contents_changed:
                 flipped_card_too = include_flipped_card(cursor, card)
             else:
                 flipped_card_too = False
@@ -56,10 +53,29 @@ def iterate(conn, cursor, iterator, count):
                     print_info('You have no more cards!')
                     break
             else:
-                card_repository.insert(conn, cursor, updated_card)
-                card_repository.delete(conn, cursor, card)
-                if flipped_card_too:
-                    card_repository.update_flipped_card(conn, cursor, card, updated_card)
+                if contents_changed:
+
+                    while True:
+                        card_repository.insert(conn, cursor, updated_card)
+                        if flipped_card_too:
+                            card_repository.insert_flipped_card(conn, cursor, updated_card)
+                        print_instruction('Create another version based on this same card?')
+                        print_info('Protip: This is how you split one card into several cards.')
+                        while True:
+                            answer = colored_prompt('[y/n]: ')
+                            if answer in ['y', 'n']:
+                                break
+                        if answer == 'n':
+                            break
+                        else:
+                            updated_card = edit(card, flipped_card_too)
+
+                    card_repository.delete(conn, cursor, card)
+                    if flipped_card_too:
+                        card_repository.delete_flipped_card(conn, cursor, card)
+                else:
+                    card_repository.insert(conn, cursor, updated_card)
+                    card_repository.delete(conn, cursor, card)
             
             count -= 1
 
