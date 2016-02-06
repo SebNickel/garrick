@@ -1,9 +1,9 @@
 import os
 import subprocess
-from getpass import getpass
 from card import Card
 from get_timestamp import get_timestamp
 from parse_config_file import parse_editor
+from colored_output import print_info, print_error, colored_getpass
 
 tmp_file = '.garricktmpfile'
 
@@ -35,8 +35,8 @@ def edit(card):
         lines[i] = lines[i].strip('\n').strip('\r')
 
     if not ('[FRONT]' in lines and '[BACK]' in lines and '[SCORE]' in lines):
-        print('Error: The lines "[FRONT]", "[BACK]", and/or "[SCORE]" are messed up.')
-        getpass('Hit Enter to start over.')
+        print_error('Error: The lines "[FRONT]", "[BACK]", and/or "[SCORE]" are messed up.')
+        colored_getpass('Hit Enter to start over.')
         return fix_your_edits(card)
 
     front_index = lines.index('[FRONT]')
@@ -52,17 +52,17 @@ def edit(card):
     last_viewed = get_timestamp()
 
     if len(lines) < score_index + 2:
-        print('Error: No more score.')
-        getpass('Hit Enter to go fix it.')
+        print_error('Error: No more score.')
+        colored_getpass('Hit Enter to go fix it.')
         faulty_card = Card(front, back, 0, last_viewed)
         return fix_your_edits(faulty_card)
 
     score_string = lines[score_index + 1]
 
     if (not score_string.isdigit()) or (not int(score_string) in range(6)):
-        print('Error: {} is not a valid score.'.format(score))
-        print('Valid scores are 0, 1, 2, 3, 4, 5.')
-        getpass('Hit Enter to go fix it.')
+        print_error('Error: {} is not a valid score.'.format(score))
+        print_info('Valid scores are 0, 1, 2, 3, 4, 5.')
+        colored_getpass('Hit Enter to go fix it.')
         faulty_card = Card(front, back, 0, last_viewed)
         return fix_your_edits(card)
     

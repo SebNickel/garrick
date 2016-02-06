@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import sys
+from colorama import init
 from pick_db_file import pick_db_file
 import db_connection
 import card_repository
@@ -7,8 +8,12 @@ from review_cards import review_cards
 from new_card import new_card
 from new_cards import new_cards
 import browse
+from colored_output import print_info, print_instruction, print_error
 
 def main():
+
+    # Initialise colorama
+    init(autoreset = True)
 
     db_file = pick_db_file()
     conn, cursor = db_connection.connect(db_file)
@@ -17,12 +22,14 @@ def main():
     if len(sys.argv) == 1:
         table_is_empty = card_repository.check_if_empty(cursor)
         if table_is_empty:
-            print("You don't have any cards yet.")
-            print('Create some cards by launching garrick with one of the following options first:')
-            print('\t-n\tcreate cards starting in one-way mode.')
-            print('\t-n2\tcreate cards starting in two-way mode.')
-            print('\t-s\tcreate cards starting in single-line and one-way mode.')
-            print('\t-s2\tcreate cards stating in single-line and two-way mode.')
+            print_error("You don't have any cards yet.")
+            print_instruction(
+                'Create some cards by launching garrick with one of the following options first:'
+            )
+            print_info('\t-n\tcreate cards starting in one-way mode.')
+            print_info('\t-n2\tcreate cards starting in two-way mode.')
+            print_info('\t-s\tcreate cards starting in single-line and one-way mode.')
+            print_info('\t-s2\tcreate cards stating in single-line and two-way mode.')
         else:
             review_cards(conn, cursor)
     elif sys.argv[1] == '-n':
@@ -48,7 +55,7 @@ def main():
     else:
         print('Usage info coming soon.')
     
-    print('Kbai')
+    print_info('Kbai')
     
     db_connection.disconnect(conn, cursor)
 

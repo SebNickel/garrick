@@ -2,12 +2,13 @@ import db_connection
 from pick_card import pick_card
 from review_card import review_card
 import card_repository
+from colored_output import print_instruction, print_info
 
 def review_cards(conn, cursor):
 
     while True:
         
-        print('[Ctrl+C to quit.]')
+        print_instruction('[Ctrl+C to quit.]')
 
         try:
             card = pick_card(conn, cursor)
@@ -15,10 +16,10 @@ def review_cards(conn, cursor):
 
             if updated_card == None:
                 card_repository.delete(conn, cursor, card)
-                print('DELETED.')
+                print_error('DELETED.')
                 table_is_empty = card_repository.check_if_empty(cursor)
                 if table_is_empty:
-                    print('You have no more cards!')
+                    print_info('You have no more cards!')
                     break
             else:
                 card_repository.insert(conn, cursor, updated_card)   

@@ -1,5 +1,6 @@
 from card import Card
 from get_timestamp import get_timestamp
+from colored_output import print_info, print_instruction, colored_prompt, colored_getpass
 
 prompt = '] '
 
@@ -9,12 +10,12 @@ def read_input(single_line_mode):
 
     try:
         if single_line_mode:
-            line = input(prompt)
+            line = colored_prompt(prompt)
             return line
         else:
             while True:
                 try:
-                    line = input(prompt)
+                    line = colored_prompt(prompt)
                     lines.append(line)
                 except EOFError:
                     print(end = '\r')
@@ -25,13 +26,13 @@ def read_input(single_line_mode):
 def menu(conn, cursor, two_way_card, single_line_mode):
 
     print()
-    print('q: Discard this card and quit.')
-    print('d: Discard this card and start over.')
-    print('t: Toggle two-way card and start over.')
-    print('s: Toggle single-line mode and start over.')
+    print_instruction('q: Discard this card and quit.')
+    print_instruction('d: Discard this card and start over.')
+    print_instruction('t: Toggle two-way card and start over.')
+    print_instruction('s: Toggle single-line mode and start over.')
 
     while True:
-        selection = input('[q/d/t/s]: ')
+        selection = colored_prompt('[q/d/t/s]: ')
         if selection in ['q', 'd', 't', 's']:
             break
     
@@ -50,23 +51,23 @@ def menu(conn, cursor, two_way_card, single_line_mode):
 def new_card(conn, cursor, two_way_card, single_line_mode):
 
     if single_line_mode:
-        print('[Ctrl+C: Discard this card and get a menu.]')
+        print_instruction('[Ctrl+C: Discard this card and get a menu.]')
     else:
-        print('[Ctrl+D: Finish current side. Ctrl+C: Discard this card and get a menu.]')
+        print_instruction('[Ctrl+D: Finish current side. Ctrl+C: Discard this card and get a menu.]')
 
     if two_way_card:
-        print('Side 1:')
+        print_info('Side 1:')
     else:
-        print('Front:')
+        print_info('Front:')
         
     front = read_input(single_line_mode)
     if front == None:
         return menu(conn, cursor, two_way_card, single_line_mode)
 
     if two_way_card:
-        print('Side 2:')
+        print_info('Side 2:')
     else:
-        print('Back:')
+        print_info('Back:')
 
     back = read_input(single_line_mode)
     if back == None:

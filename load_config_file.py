@@ -1,4 +1,5 @@
 import os
+from colored_output import print_info, print_error, print_instruction
 
 dir_name = '.garrick'
 config_file_name = 'garrick.conf'
@@ -9,9 +10,11 @@ def locate_config_file():
 
     if home_dir == None:
         print()
-        print("Sorry, your system doesn't have a HOME environment variable set to any directory.")
-        print("I am not equipped to deal with this situation :(")
-        print("Which OS are you running?")
+        print_error(
+            "Sorry, your system doesn't have a HOME environment variable set to any directory."
+        )
+        print_error("I am not equipped to deal with this situation :(")
+        print_error("Which OS are you running?")
         print()
         raise Exception('HOME variable not set.')
 
@@ -26,11 +29,11 @@ def create_config_file(garrick_dir):
 
     if os.path.exists(garrick_dir):
         print()
-        print('Uh oh.')
-        print('There is a folder named ".garrick" in your home directory,')
-        print('but it doesn\'t contain the file "garrick.conf".')
-        print("If you've renamed or moved it, can you please change it back?")
-        print('I am scared of breaking things. I will go now. Bai.')
+        print_error('Uh oh.')
+        print_error('There is a folder named ".garrick" in your home directory,')
+        print_error('but it doesn\'t contain the file "garrick.conf".')
+        print_error("If you've renamed or moved it, can you please change it back?")
+        print_error('I am scared of breaking things. I will go now. Bai.')
         print()
         raise Exception('Directory exists.')
 
@@ -49,10 +52,12 @@ def create_config_file(garrick_dir):
         else:
             f.write('editor = {}'.format(default_editor))
 
-    print('Created directory {}.'.format(garrick_dir))
+    print_info('Created directory {}.'.format(garrick_dir))
     if default_editor == None:
-        print('You might want to set the "editor" variable in {},'.format(config_file_full_path))
-        print('so that you can edit your cards with your favourite editor.')
+        print_instruction(
+            'You might want to set the "editor" variable in {},'.format(config_file_full_path)
+        )
+        print_instruction('so that you can edit your cards with your favourite editor.')
     else:
-        print('Editor set to {}.'.format(default_editor))
-        print('(You can change this in {}.)'.format(config_file_full_path))
+        print_info('Editor set to {}.'.format(default_editor))
+        print_instruction('(You can change this in {}.)'.format(config_file_full_path))

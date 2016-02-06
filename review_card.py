@@ -1,17 +1,17 @@
-from getpass import getpass
 from card import Card
 import card_repository
 from unescape import unescape
 from get_timestamp import get_timestamp
 from edit import edit
+from colored_output import print_instruction, colored_prompt, colored_getpass
 
 def menu(card):
     
-    print('e: Edit this card.')
-    print('d: Delete this card.')
+    print_instruction('e: Edit this card.')
+    print_instruction('d: Delete this card.')
 
     while True:
-        selection = input('[e/d]: ')
+        selection = colored_prompt('[e/d]: ')
         if selection in ['e', 'd']:
             break
 
@@ -26,11 +26,11 @@ def review_card(card):
     back = unescape(card.back)
 
     print(front)
-    getpass('[Enter to flip the card.]')
+    colored_getpass('[Enter to flip the card.]')
     print(back)
 
     while True:
-        score = input("[Score yourself from 0 to 5, or enter 'o' for options:] ")
+        score = colored_prompt("[Score yourself from 0 to 5, or enter 'o' for options:] ")
         if score == 'o':
             return menu(card)
         if score.isdigit() and int(score) in list(range(6)):

@@ -1,6 +1,7 @@
 import os
 from parse_config_file import parse_db_files
 from load_config_file import locate_config_file
+from colored_output import colored_prompt
 
 def pick_db_file():
 
@@ -18,7 +19,7 @@ def pick_db_file():
             print('{}. {}'.format(i + 1, db_files[i]))
 
         while True:
-            selection = input('Enter the number of the database file to use: ')
+            selection = colored_prompt('Enter the number of the database file to use: ')
             if selection.isdigit() and int(selection) in range(1, len(db_files) + 1):
                 db_number = int(selection)
                 break

@@ -3,10 +3,12 @@ from setuptools import setup
 setup(
     name = 'garrick',
     version = '1.0.dev3',
+    install_requires = 'colorama',
     py_modules = [
         'browse',
         'card', 
         'card_repository', 
+        'colored_output',
         'db_connection', 
         'edit',
         'garrick',

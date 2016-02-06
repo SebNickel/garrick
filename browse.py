@@ -1,17 +1,18 @@
 import card_repository
 from card import Card
 from review_card import review_card
+from colored_output import print_info, print_error, print_instruction, colored_prompt, colored_getpass
 
 def browse(conn, cursor, results):
 
     count = len(results)
 
     if count == 0:
-        print('No results.')
+        print_error('No results.')
     elif count == 1:
-        print('[1 RESULT.]')
+        print_info('[1 RESULT.]')
     else:
-        print('[{} RESULTS.]'.format(count))
+        print_info('[{} RESULTS.]'.format(count))
 
     try:
         for row in results:
@@ -21,7 +22,7 @@ def browse(conn, cursor, results):
 
             if updated_card == None:
                 card_repository.delete(conn, cursor, card)
-                print('DELETED.')
+                print_error('DELETED.')
             else:
                 card_repository.insert(conn, cursor, updated_card)
                 card_repository.delete(conn, cursor, card)
@@ -29,28 +30,28 @@ def browse(conn, cursor, results):
             count -= 1
 
             if count > 0:
-                print('[{} MORE.]'.format(count))
+                print_info('[{} MORE.]'.format(count))
 
     except KeyboardInterrupt:
         print()
 
 def browse_by_regex(conn, cursor):
-    regex = input('Enter regular expression: ')
+    regex = colored_prompt('Enter regular expression: ')
     results = card_repository.select_by_regex(cursor, regex)
     browse(conn, cursor, results)
 
 def browse_by_regex_front(conn, cursor):
-    regex = input('Enter regular expression: ')
+    regex = colored_prompt('Enter regular expression: ')
     results = card_repository.select_by_regex_front(cursor, regex)
     browse(conn, cursor, results)
 
 def browse_by_regex_back(conn, cursor):
-    regex = input('Enter regular expression: ')
+    regex = colored_prompt('Enter regular expression: ')
     results = card_repository.select_by_regex_back(cursor, regex)
     browse(conn, cursor, results)
 
 def browse_by_score(conn, cursor):
-    score = input('Show cards with the following score: ')
+    score = colored_prompt('Show cards with the following score: ')
     results = card_repository.select_by_score(cursor, score)
     browse(conn, cursor, results)
 
