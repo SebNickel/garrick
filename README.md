@@ -21,6 +21,7 @@ $ cd garrick
 * ~~Allow browsing cards.~~
 * Allow editing and deleting "sister cards" together (i.e. both versions of a two-way card).
 * Allow splitting one card into several cards when editing.
-* Add coloured output, probably using the colorama library for better portability.
+* ~~Add coloured output, probably using the colorama library for better portability.~~
 * Catch configparser exceptions.
 * Merge review\_cards in with the browse module, using iterators.
+* Make colours user-definable.
