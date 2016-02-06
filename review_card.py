@@ -7,6 +7,8 @@ from colored_output import print_instruction, colored_prompt, colored_getpass
 
 def menu(card):
     
+    contents_changed = True
+
     print_instruction('e: Edit this card.')
     print_instruction('d: Delete this card.')
 
@@ -16,9 +18,9 @@ def menu(card):
             break
 
     if selection == 'e':
-        return edit(card)
+        return edit(card), contents_changed
     elif selection == 'd':
-        return None
+        return None, contents_changed
 
 def review_card(card):
     
@@ -36,6 +38,8 @@ def review_card(card):
         if score.isdigit() and int(score) in list(range(6)):
             break
     
+    contents_changed = False
+
     last_viewed = get_timestamp()
 
     updated_card = Card(
@@ -45,4 +49,4 @@ def review_card(card):
         last_viewed
     )
 
-    return updated_card
+    return updated_card, contents_changed

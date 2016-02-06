@@ -147,6 +147,21 @@ def select_by_last_viewed_reverse(cursor):
 
     return results
 
+def update_flipped_card(conn, cursor, card, updated_card):
+
+    args = (updated_card.back, updated_card.front, card.back, card.front)
+
+    query = """
+        UPDATE cards
+        SET front = ?,
+            back = ?
+        WHERE front = ?
+        AND back = ?
+    """
+
+    cursor.execute(query, args)
+    conn.commit()
+
 def delete(conn, cursor, card):
 
     args = card.to_tuple()
@@ -161,6 +176,40 @@ def delete(conn, cursor, card):
 
     cursor.execute(query, args)
     conn.commit()
+
+def delete_flipped_card(conn, cursor, card):
+
+    args = (card.back, card.front)
+
+    query = """
+        DELETE FROM cards
+        WHERE front = ?
+        AND back = ?
+    """
+
+    cursor.execute(query, args)
+    conn.commit()
+
+def is_two_way_card(cursor, card):
+    
+    args = (card.back, card.front)
+
+    query = """
+        SELECT EXISTS(
+            SELECT *
+            FROM cards
+            WHERE front = ?
+            AND back = ?
+        )
+    """
+
+    cursor.execute(query, args)
+    query_result = cursor.fetchone()
+
+    if query_result[0] == 0:
+        return False
+    else:
+        return True
 
 def count(cursor):
     
