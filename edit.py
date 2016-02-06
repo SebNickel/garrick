@@ -7,19 +7,29 @@ from colored_output import print_info, print_error, colored_getpass
 
 tmp_file = '.garricktmpfile'
 
-def fix_your_edits(card):
+def fix_your_edits(card, two_way_card):
 
-    return edit(card)
+    return edit(card, two_way_card)
 
-def edit(card):
+def edit(card, two_way_card):
 
     editor = parse_editor()
+    
+    if two_way_card:
+        first_tag = '[SIDE 1]'
+    else:
+        first_tag = '[FRONT]'
 
+    if two_way_card:
+        second_tag = '[SIDE 2]'
+    else:
+        second_tag = '[BACK]'
+        
     with open(tmp_file, 'w') as tmp:
         tmp.write('EDIT THE CONTENTS OF THE CARD, SAVE IT AND QUIT THE EDITOR.\n')
-        tmp.write('[FRONT]\n')
+        tmp.write(first_tag + '\n')
         tmp.write(card.front + '\n')
-        tmp.write('[BACK]\n')
+        tmp.write(second_tag + '\n')
         tmp.write(card.back + '\n')
         tmp.write('[SCORE]\n')
         tmp.write(str(card.score))
@@ -34,13 +44,16 @@ def edit(card):
     for i in range(len(lines)):
         lines[i] = lines[i].strip('\n').strip('\r')
 
-    if not ('[FRONT]' in lines and '[BACK]' in lines and '[SCORE]' in lines):
-        print_error('Error: The lines "[FRONT]", "[BACK]", and/or "[SCORE]" are messed up.')
+    if not (first_tag in lines and second_tag in lines and '[SCORE]' in lines):
+        print_error(
+            'Error: The lines "{}", "{}", and/or "[SCORE]" are messed up.'\
+                .format(first_tag, second_tag)
+        )
         colored_getpass('Hit Enter to start over.')
         return fix_your_edits(card)
 
-    front_index = lines.index('[FRONT]')
-    back_index = lines.index('[BACK]')
+    front_index = lines.index(first_tag)
+    back_index = lines.index(second_tag)
     score_index = lines.index('[SCORE]')
 
     front_lines = lines[front_index + 1:back_index]
@@ -52,7 +65,7 @@ def edit(card):
     last_viewed = get_timestamp()
 
     if len(lines) < score_index + 2:
-        print_error('Error: No more score.')
+        print_error('Error: No score.')
         colored_getpass('Hit Enter to go fix it.')
         faulty_card = Card(front, back, 0, last_viewed)
         return fix_your_edits(faulty_card)

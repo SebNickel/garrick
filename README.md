@@ -17,7 +17,7 @@ $ cd garrick
 * ~~Allow easy editing and deleting of cards.~~
 * ~~Add a "single line mode", for entering cards with only one line on each side without the need to press Ctrl+D.~~
 * ~~Allow using other editors, not just vim.~~
-* Allow creating new cards in "editor mode".
+* ~~Allow creating new cards in "editor mode".~~
 * ~~Allow browsing cards.~~
 * ~~Allow editing and deleting "sister cards" together (i.e. both versions of a two-way card).~~
 * Allow splitting one card into several cards when editing.

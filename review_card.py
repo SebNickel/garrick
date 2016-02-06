@@ -18,7 +18,8 @@ def menu(card):
             break
 
     if selection == 'e':
-        return edit(card), contents_changed
+        two_way_card = False
+        return edit(card, two_way_card), contents_changed
     elif selection == 'd':
         return None, contents_changed
 

@@ -29,17 +29,23 @@ def main():
             print_instruction('\t-n\tcreate cards starting in one-way mode.')
             print_instruction('\t-n2\tcreate cards starting in two-way mode.')
             print_instruction('\t-s\tcreate cards starting in single-line and one-way mode.')
-            print_instruction('\t-s2\tcreate cards stating in single-line and two-way mode.')
+            print_instruction('\t-s2\tcreate cards starting in single-line and two-way mode.')
+            print_instruction('\t-e\tcreate cards starting in editor mode and in one-way mode.')
+            print_instruction('\t-s2\tcreate cards starting in editor mode and in two-way mode.')
         else:
             review.review(conn, cursor)
     elif sys.argv[1] == '-n':
-        new_cards(conn, cursor, False, False)
+        new_cards(conn, cursor, False, False, False)
     elif sys.argv[1] == '-n2':
-        new_cards(conn, cursor, True, False)
+        new_cards(conn, cursor, True, False, False)
     elif sys.argv[1] == '-s':
-        new_cards(conn, cursor, False, True)
+        new_cards(conn, cursor, False, True, False)
     elif sys.argv[1] == '-s2':
-        new_cards(conn, cursor, True, True)
+        new_cards(conn, cursor, True, True, False)
+    elif sys.argv[1] == '-e':
+        new_cards(conn, cursor, False, False, True)
+    elif sys.argv[1] == '-e2':
+        new_cards(conn, cursor, True, False, True)
     elif sys.argv[1] == '-b':
         review.browse_by_regex(conn, cursor) 
     elif sys.argv[1] == '-bf':

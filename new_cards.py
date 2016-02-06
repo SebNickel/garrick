@@ -3,12 +3,12 @@ from card import Card
 from new_card import new_card
 from colored_output import print_info
 
-def new_cards(conn, cursor, two_way_card, single_line_mode):
+def new_cards(conn, cursor, two_way_card, single_line_mode, editor_mode):
 
     while True:
 
-        card, two_way_card, single_line_mode = \
-            new_card(conn, cursor, two_way_card, single_line_mode)
+        card, two_way_card, single_line_mode, editor_mode = \
+            new_card(two_way_card, single_line_mode, editor_mode)
 
         if card == None:
             break
