@@ -3,7 +3,7 @@ import card_repository
 from unescape import unescape
 from get_timestamp import get_timestamp
 from edit import edit
-from colored_output import print_instruction, colored_prompt, colored_getpass
+from user_colors import print_instruction, colored_prompt, colored_getpass
 
 def menu(card):
     
@@ -25,12 +25,9 @@ def menu(card):
 
 def review_card(card):
     
-    front = unescape(card.front)
-    back = unescape(card.back)
-
-    print(front)
+    print(card.front)
     colored_getpass('[Enter to flip the card.]')
-    print(back)
+    print(card.back)
 
     while True:
         score = colored_prompt("[Score yourself from 0 to 5, or enter 'o' for options:] ")

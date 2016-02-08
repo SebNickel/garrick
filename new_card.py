@@ -1,7 +1,7 @@
 from card import Card
 from get_timestamp import get_timestamp
 from edit import edit
-from colored_output import print_info, print_side, print_instruction, colored_prompt, colored_getpass
+from user_colors import print_info, print_side, print_instruction, colored_prompt, colored_getpass
 
 prompt = '] '
 

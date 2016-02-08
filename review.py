@@ -3,7 +3,7 @@ from card import Card
 from edit import edit
 from iterators import review_iterator, browsing_iterator
 from review_card import review_card
-from colored_output import print_info, print_instruction, print_error, colored_prompt
+from user_colors import print_info, print_instruction, print_error, colored_prompt
 
 def include_flipped_card(cursor, card):
 

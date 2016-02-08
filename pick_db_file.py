@@ -1,7 +1,7 @@
 import os
 from parse_config_file import parse_db_files
 from load_config_file import locate_config_file
-from colored_output import colored_prompt
+from user_colors import colored_prompt
 
 def pick_db_file():
 

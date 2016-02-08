@@ -6,3 +6,14 @@ pokemon.db
 
 [config]
 editor = vim
+
+# COLOURS
+# Available choices are:
+# black, red, green, yellow, blue, magenta, cyan, white,
+# brightblack, brightred, etc.
+info = brightgreen
+error = brightred
+instruction = brightmagenta
+side_of_card = brightyellow
+prompt = brightcyan
+silent_prompt = brightyellow

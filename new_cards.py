@@ -1,7 +1,7 @@
 import card_repository
 from card import Card
 from new_card import new_card
-from colored_output import print_info
+from user_colors import print_info
 
 def new_cards(conn, cursor, two_way_card, single_line_mode, editor_mode):
 

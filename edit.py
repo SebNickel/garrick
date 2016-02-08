@@ -3,7 +3,7 @@ import subprocess
 from card import Card
 from get_timestamp import get_timestamp
 from parse_config_file import parse_editor
-from colored_output import print_info, print_error, colored_getpass
+from user_colors import print_info, print_error, colored_getpass
 
 tmp_file = '.garricktmpfile'
 

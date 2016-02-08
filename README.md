@@ -24,8 +24,8 @@ $ cd garrick
 * ~~Add coloured output, probably using the colorama library for better portability.~~
 * ~~Catch configparser exceptions.~~
 * ~~Merge review\_cards in with the browse module, using iterators.~~
-* Make colours user-definable.
-* Fix encoding issues.
+* ~~Make colours user-definable.~~
+* ~~Fix encoding issues.~~
 * Usage info.
 * User guide.
 * Major cleanup.

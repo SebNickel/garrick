@@ -8,7 +8,7 @@ from review_cards import review_cards
 from new_card import new_card
 from new_cards import new_cards
 import review
-from colored_output import print_info, print_instruction, print_error
+from user_colors import print_info, print_instruction, print_error
 
 def main():
 

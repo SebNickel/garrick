@@ -2,13 +2,15 @@ from setuptools import setup
 
 setup(
     name = 'garrick',
-    version = '1.0.dev4',
+    version = '1.0.dev5',
     install_requires = 'colorama',
     py_modules = [
         'card', 
         'card_repository', 
         'colored_output',
+        'colored_output_default',
         'db_connection', 
+        'default_colors',
         'edit',
         'garrick',
         'get_timestamp', 
@@ -21,6 +23,7 @@ setup(
         'pick_db_file', 
         'review',
         'review_card', 
+        'user_colors',
         'unescape'
     ],
     data_files = [('', ['LICENSE.txt', 'README.md', 'garrick.conf.example'])],
