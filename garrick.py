@@ -9,11 +9,20 @@ from new_card import new_card
 from new_cards import new_cards
 import review
 from user_colors import print_info, print_instruction, print_error
+from usage_info import print_usage_info
 
 def main():
 
     # Initialise colorama
     init()
+
+    valid_args = ['-n', '-n2', '-s', '-s2', '-e', '-e2', '-b', '-bf', '-bb', '-bs', '-bl', '-br']
+
+    if len(sys.argv) > 1 and sys.argv[1] not in valid_args:
+        print_usage_info(sys.argv)        
+        if sys.argv[1] not in ['-h', '--help']:
+            sys.exit(1)
+        sys.exit()
 
     db_file = pick_db_file()
     conn, cursor = db_connection.connect(db_file)
@@ -26,12 +35,12 @@ def main():
             print_instruction(
                 'Create some cards by launching garrick with one of the following options first:'
             )
-            print_instruction('\t-n\tcreate cards starting in one-way mode.')
-            print_instruction('\t-n2\tcreate cards starting in two-way mode.')
-            print_instruction('\t-s\tcreate cards starting in single-line and one-way mode.')
-            print_instruction('\t-s2\tcreate cards starting in single-line and two-way mode.')
-            print_instruction('\t-e\tcreate cards starting in editor mode and in one-way mode.')
-            print_instruction('\t-s2\tcreate cards starting in editor mode and in two-way mode.')
+            print_instruction('\t-n\tCreate cards starting in one-way mode.')
+            print_instruction('\t-n2\tCreate cards starting in two-way mode.')
+            print_instruction('\t-s\tCreate cards starting in single-line and one-way mode.')
+            print_instruction('\t-s2\tCreate cards starting in single-line and two-way mode.')
+            print_instruction('\t-e\tCreate cards starting in editor mode and in one-way mode.')
+            print_instruction('\t-s2\tCreate cards starting in editor mode and in two-way mode.')
         else:
             review.review(conn, cursor)
     elif sys.argv[1] == '-n':
@@ -58,8 +67,6 @@ def main():
         review.browse_by_last_viewed(conn, cursor)
     elif sys.argv[1] == '-br':
         review.browse_by_last_viewed_reverse(conn, cursor)
-    else:
-        print('Usage info coming soon.')
     
     print_info('Kbai')
     

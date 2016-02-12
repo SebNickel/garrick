@@ -26,7 +26,7 @@ $ cd garrick
 * ~~Merge review\_cards in with the browse module, using iterators.~~
 * ~~Make colours user-definable.~~
 * ~~Fix encoding issues.~~
-* Usage info.
+* ~~Usage info.~~
 * User guide.
 * Major cleanup.
 * 1.0 release ^^

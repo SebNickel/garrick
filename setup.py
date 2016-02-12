@@ -23,6 +23,7 @@ setup(
         'review',
         'review_card', 
         'timestamps',
+        'usage_info',
         'user_colors',
         'unescape'
     ],
