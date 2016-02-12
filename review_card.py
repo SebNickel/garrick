@@ -1,7 +1,7 @@
 from card import Card
 import card_repository
 from unescape import unescape
-from get_timestamp import get_timestamp
+from timestamps import get_timestamp
 from edit import edit
 from user_colors import print_instruction, colored_prompt, colored_getpass
 

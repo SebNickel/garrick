@@ -13,7 +13,6 @@ setup(
         'default_colors',
         'edit',
         'garrick',
-        'get_timestamp', 
         'iterators',
         'load_config_file',
         'new_card', 
@@ -23,6 +22,7 @@ setup(
         'pick_db_file', 
         'review',
         'review_card', 
+        'timestamps',
         'user_colors',
         'unescape'
     ],

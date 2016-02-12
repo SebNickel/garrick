@@ -4,6 +4,7 @@ from edit import edit
 from iterators import review_iterator, browsing_iterator
 from review_card import review_card
 from user_colors import print_info, print_instruction, print_error, colored_prompt
+from timestamps import add_half_interval
 
 def include_flipped_card(cursor, card):
 
@@ -17,6 +18,25 @@ def include_flipped_card(cursor, card):
         return True
     else:
         return False
+
+def bump_flipped_card_timestamp(conn, cursor, card):
+
+    flipped_card = card_repository.select_flipped_card(cursor, card)
+
+    if flipped_card == None:
+        return
+
+    bumped_last_viewed = add_half_interval(flipped_card.last_viewed)
+
+    bumped_flipped_card = Card(
+        flipped_card.front,
+        flipped_card.back,
+        flipped_card.score,
+        bumped_last_viewed
+    )
+
+    card_repository.insert(conn, cursor, bumped_flipped_card)
+    card_repository.delete(conn, cursor, flipped_card)
 
 def iterate(conn, cursor, iterator, count):
 
@@ -76,6 +96,7 @@ def iterate(conn, cursor, iterator, count):
                 else:
                     card_repository.insert(conn, cursor, updated_card)
                     card_repository.delete(conn, cursor, card)
+                    bump_flipped_card_timestamp(conn, cursor, card)
             
             count -= 1
 

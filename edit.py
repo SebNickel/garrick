@@ -1,15 +1,11 @@
 import os
 import subprocess
 from card import Card
-from get_timestamp import get_timestamp
+from timestamps import get_timestamp
 from parse_config_file import parse_editor
 from user_colors import print_info, print_error, colored_getpass
 
 tmp_file = '.garricktmpfile'
-
-def fix_your_edits(card, two_way_card):
-
-    return edit(card, two_way_card)
 
 def edit(card, two_way_card):
 
@@ -50,7 +46,7 @@ def edit(card, two_way_card):
                 .format(first_tag, second_tag)
         )
         colored_getpass('Hit Enter to start over.')
-        return fix_your_edits(card)
+        return edit(card, two_way_card)
 
     front_index = lines.index(first_tag)
     back_index = lines.index(second_tag)
@@ -68,16 +64,16 @@ def edit(card, two_way_card):
         print_error('Error: No score.')
         colored_getpass('Hit Enter to go fix it.')
         faulty_card = Card(front, back, 0, last_viewed)
-        return fix_your_edits(faulty_card)
+        return edit(faulty_card, two_way_card)
 
     score_string = lines[score_index + 1]
 
     if (not score_string.isdigit()) or (not int(score_string) in range(6)):
-        print_error('Error: {} is not a valid score.'.format(score))
+        print_error('Error: {} is not a valid score.'.format(score_string))
         print_info('Valid scores are 0, 1, 2, 3, 4, 5.')
         colored_getpass('Hit Enter to go fix it.')
         faulty_card = Card(front, back, 0, last_viewed)
-        return fix_your_edits(card)
+        return edit(card, two_way_card)
     
     score = int(score_string)
 

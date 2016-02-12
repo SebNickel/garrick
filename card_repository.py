@@ -159,6 +159,27 @@ def select_by_last_viewed_reverse(cursor):
 
     return results
 
+def select_flipped_card(cursor, card):
+
+    args = (card.back, card.front)
+
+    query = """
+        SELECT *
+        FROM cards
+        WHERE front = ?
+        AND back = ?
+    """
+
+    cursor.execute(query, args)
+
+    result = cursor.fetchall()
+
+    if len(result) == 0:
+        return None
+    else:
+        row = result[0]
+        return Card(*row)
+
 def delete(conn, cursor, card):
 
     args = card.to_tuple()

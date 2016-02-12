@@ -47,6 +47,7 @@ def write_example_config():
         f.write('pokemon.db\n\n')
         f.write('[config]\n')
         f.write('editor = vim\n')
+        f.write('\n# COLOURS')
         f.write('# Available choices are:')
         f.write('# black, red, green, yellow, blue, magenta, cyan, white,')
         f.write('# brightblack, brightred, etc.')

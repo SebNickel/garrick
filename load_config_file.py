@@ -30,8 +30,8 @@ def create_config_file(garrick_dir):
     if os.path.exists(garrick_dir):
         print()
         default_print_error('Uh oh.')
-        default_print_error('There is a folder named ".garrick" in your home directory,')
-        default_print_error('but it doesn\'t contain the file "garrick.conf".')
+        default_print_error('There is a folder named "{}" in your home directory,'.format(dir_name))
+        default_print_error('but it doesn\'t contain the file "{}".'.format(config_file_name))
         default_print_error("If you've renamed or moved it, can you please change it back?")
         default_print_error('I am scared of breaking things. I will go now. Bai.')
         print()
@@ -51,6 +51,16 @@ def create_config_file(garrick_dir):
             f.write('editor =')
         else:
             f.write('editor = {}'.format(default_editor))
+        f.write('\n# COLOURS')
+        f.write('# Available choices are:')
+        f.write('# black, red, green, yellow, blue, magenta, cyan, white,')
+        f.write('# brightblack, brightred, etc.')
+        f.write('info = brightgreen')
+        f.write('error = brightred')
+        f.write('instruction = brightmagenta')
+        f.write('side_of_card = brightyellow')
+        f.write('prompt = brightcyan')
+        f.write('silent_prompt = brightyellow')
 
     print_info('Created directory {}.'.format(garrick_dir))
     if default_editor == None:
