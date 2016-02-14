@@ -51,14 +51,12 @@ def compose_in_editor(two_way_card):
     if selection == 's':
         return new_card(two_way_card, single_line_mode=True, editor_mode=False)
 
-    else:
+    bogus_timestamp = '1991-08-25 20:57:08'
+    empty_card = Card('', '', 0, bogus_timestamp)
 
-        bogus_timestamp = '1991-08-25 20:57:08'
-        empty_card = Card('', '', 0, bogus_timestamp)
+    card = edit(empty_card, two_way_card)
 
-        card = edit(empty_card, two_way_card)
-
-        return card, two_way_card, False, True
+    return card, two_way_card, False, True
 
 def menu(two_way_card, single_line_mode, editor_mode):
 

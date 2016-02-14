@@ -6,7 +6,7 @@ from review_card import review_card
 from user_colors import print_info, print_instruction, print_error, colored_prompt
 from timestamps import add_half_interval
 
-def include_flipped_card(cursor, card):
+def include_flipped_card():
 
     print_info('This is a two-way card.')
     print_info('Should your changes also affect the flipped version of this card?')
@@ -57,7 +57,7 @@ def iterate(conn, cursor, iterator, count):
             is_two_way_card = card_repository.is_two_way_card(cursor, card)
 
             if is_two_way_card and contents_changed:
-                flipped_card_too = include_flipped_card(cursor, card)
+                flipped_card_too = include_flipped_card()
             else:
                 flipped_card_too = False
 
@@ -81,6 +81,7 @@ def iterate(conn, cursor, iterator, count):
                             card_repository.insert_flipped_card(conn, cursor, updated_card)
                         else:
                             bump_flipped_card_timestamp(conn, cursor, card)
+                        print_info('Edited.')
                         print_instruction('Create another version based on this same card?')
                         print_info('Protip: This is how you split one card into several cards.')
                         while True:

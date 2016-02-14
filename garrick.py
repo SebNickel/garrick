@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys
-from colorama import init
+import colorama
 from pick_db_file import pick_db_file
 import db_connection
 import card_repository
@@ -14,7 +14,7 @@ from usage_info import print_usage_info
 def main():
 
     # Initialise colorama
-    init()
+    colorama.init()
 
     valid_args = ['-n', '-n2', '-s', '-s2', '-e', '-e2', '-b', '-bf', '-bb', '-bs', '-bl', '-br']
 

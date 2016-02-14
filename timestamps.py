@@ -3,6 +3,7 @@ from datetime import datetime
 time_format = '%Y-%m-%d %H:%M:%S'
 
 def get_timestamp():
+
     return datetime.now().strftime(time_format)
 
 def add_half_interval(last_viewed):
