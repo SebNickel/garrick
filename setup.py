@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name = 'garrick',
-    version = '1.0.dev5',
+    version = '1.0.dev6',
     install_requires = 'colorama',
     py_modules = [
         'card', 

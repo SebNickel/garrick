@@ -55,7 +55,7 @@ def insert_flipped_card(conn, cursor, card):
     cursor.execute(query, args)
     conn.commit()
 
-def select(cursor, score):
+def select_one_by_score(cursor, score):
 
     query = """
         SELECT *
@@ -73,6 +73,8 @@ def select(cursor, score):
     else:
         card = Card(*row)
         return card
+
+# MATCHES is a custom function defined in db_connection.py
 
 def select_by_regex(cursor, regex):
 

@@ -44,17 +44,17 @@ def main():
         else:
             review.review(conn, cursor)
     elif sys.argv[1] == '-n':
-        new_cards(conn, cursor, False, False, False)
+        new_cards(conn, cursor, two_way_card=False, single_line_mode=False, editor_mode=False)
     elif sys.argv[1] == '-n2':
-        new_cards(conn, cursor, True, False, False)
+        new_cards(conn, cursor, two_way_card=True, single_line_mode=False, editor_mode=False)
     elif sys.argv[1] == '-s':
-        new_cards(conn, cursor, False, True, False)
+        new_cards(conn, cursor, two_way_card=False, single_line_mode=True, editor_mode=False)
     elif sys.argv[1] == '-s2':
-        new_cards(conn, cursor, True, True, False)
+        new_cards(conn, cursor, two_way_card=True, single_line_mode=True, editor_mode=False)
     elif sys.argv[1] == '-e':
-        new_cards(conn, cursor, False, False, True)
+        new_cards(conn, cursor, two_way_card=False, single_line_mode=False, editor_mode=True)
     elif sys.argv[1] == '-e2':
-        new_cards(conn, cursor, True, False, True)
+        new_cards(conn, cursor, two_way_card=True, single_line_mode=False, editor_mode=True)
     elif sys.argv[1] == '-b':
         review.browse_by_regex(conn, cursor) 
     elif sys.argv[1] == '-bf':

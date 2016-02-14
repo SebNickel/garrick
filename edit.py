@@ -7,27 +7,17 @@ from user_colors import print_info, print_error, colored_getpass
 
 tmp_file = '.garricktmpfile'
 
-def edit(card, two_way_card):
+editor = parse_editor()
 
-    editor = parse_editor()
+def write_edits(card, tags):
     
-    if two_way_card:
-        first_tag = '[SIDE 1]'
-    else:
-        first_tag = '[FRONT]'
-
-    if two_way_card:
-        second_tag = '[SIDE 2]'
-    else:
-        second_tag = '[BACK]'
-        
     with open(tmp_file, 'w') as tmp:
         tmp.write('EDIT THE CONTENTS OF THE CARD, SAVE IT AND QUIT THE EDITOR.\n')
-        tmp.write(first_tag + '\n')
+        tmp.write(tags[0] + '\n')
         tmp.write(card.front + '\n')
-        tmp.write(second_tag + '\n')
+        tmp.write(tags[1] + '\n')
         tmp.write(card.back + '\n')
-        tmp.write('[SCORE]\n')
+        tmp.write(tags[2] + '\n')
         tmp.write(str(card.score))
 
     subprocess.run([editor, tmp_file])
@@ -40,17 +30,18 @@ def edit(card, two_way_card):
     for i in range(len(lines)):
         lines[i] = lines[i].strip('\n').strip('\r')
 
-    if not (first_tag in lines and second_tag in lines and '[SCORE]' in lines):
-        print_error(
-            'Error: The lines "{}", "{}", and/or "[SCORE]" are messed up.'\
-                .format(first_tag, second_tag)
-        )
-        colored_getpass('Hit Enter to start over.')
-        return edit(card, two_way_card)
+    return lines
 
-    front_index = lines.index(first_tag)
-    back_index = lines.index(second_tag)
-    score_index = lines.index('[SCORE]')
+def parse_edits(lines, tags):
+
+    if not all([x in lines for x in tags]):
+        print_error('Error: The lines "{}", "{}", and/or "{}" are messed up.'.format(*tags))
+        colored_getpass('Hit Enter to start over.')
+        return None, None
+
+    front_index = lines.index(tags[0])
+    back_index = lines.index(tags[1])
+    score_index = lines.index(tags[2])
 
     front_lines = lines[front_index + 1:back_index]
     back_lines = lines[back_index + 1:score_index]
@@ -64,7 +55,8 @@ def edit(card, two_way_card):
         print_error('Error: No score.')
         colored_getpass('Hit Enter to go fix it.')
         faulty_card = Card(front, back, 0, last_viewed)
-        return edit(faulty_card, two_way_card)
+        faulty = True
+        return faulty_card, faulty
 
     score_string = lines[score_index + 1]
 
@@ -73,10 +65,32 @@ def edit(card, two_way_card):
         print_info('Valid scores are 0, 1, 2, 3, 4, 5.')
         colored_getpass('Hit Enter to go fix it.')
         faulty_card = Card(front, back, 0, last_viewed)
-        return edit(card, two_way_card)
+        faulty = True
+        return faulty_card, faulty
     
     score = int(score_string)
 
     edited_card = Card(front, back, score, last_viewed)
+
+    faulty = False
+
+    return edited_card, faulty
+
+def edit(card, two_way_card):
+    
+    if two_way_card:
+        tags = ['[SIDE 1]', '[SIDE 2]', '[SCORE]']
+    else:
+        tags = ['[FRONT]', '[BACK]', '[SCORE]']
+
+    lines = write_edits(card, tags)
+    
+    edited_card, faulty = parse_edits(lines, tags)
+
+    if edited_card == None:
+        return edit(card, two_way_card)
+
+    if faulty:
+        return edit(edited_card, two_way_card)
 
     return edited_card

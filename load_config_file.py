@@ -21,21 +21,25 @@ def locate_config_file():
     garrick_dir = os.path.join(home_dir, dir_name)
 
     if not os.path.exists(os.path.join(garrick_dir, config_file_name)):
+
+        if os.path.exists(garrick_dir):
+
+            print()
+            default_print_error('Uh oh.')
+            default_print_error(
+                'There is a folder named "{}" in your home directory,'.format(dir_name)
+            )
+            default_print_error('but it doesn\'t contain the file "{}".'.format(config_file_name))
+            default_print_error("If you've renamed or moved it, can you please change it back?")
+            default_print_error('I am scared of breaking things. I will go now. Bai.')
+            print()
+            raise Exception('Directory exists.')
+
         create_config_file(garrick_dir)
         
     return garrick_dir, config_file_name
 
 def create_config_file(garrick_dir):
-
-    if os.path.exists(garrick_dir):
-        print()
-        default_print_error('Uh oh.')
-        default_print_error('There is a folder named "{}" in your home directory,'.format(dir_name))
-        default_print_error('but it doesn\'t contain the file "{}".'.format(config_file_name))
-        default_print_error("If you've renamed or moved it, can you please change it back?")
-        default_print_error('I am scared of breaking things. I will go now. Bai.')
-        print()
-        raise Exception('Directory exists.')
 
     os.mkdir(garrick_dir)
     
@@ -48,19 +52,19 @@ def create_config_file(garrick_dir):
         f.write('cards.db\n\n')
         f.write('[config]\n')
         if default_editor == None:
-            f.write('editor =')
+            f.write('editor =\n')
         else:
-            f.write('editor = {}'.format(default_editor))
-        f.write('\n# COLOURS')
-        f.write('# Available choices are:')
-        f.write('# black, red, green, yellow, blue, magenta, cyan, white,')
-        f.write('# brightblack, brightred, etc.')
-        f.write('info = brightgreen')
-        f.write('error = brightred')
-        f.write('instruction = brightmagenta')
-        f.write('side_of_card = brightyellow')
-        f.write('prompt = brightcyan')
-        f.write('silent_prompt = brightyellow')
+            f.write('editor = {}\n'.format(default_editor))
+        f.write('\n# COLOURS\n')
+        f.write('# Available choices are:\n')
+        f.write('# black, red, green, yellow, blue, magenta, cyan, white,\n')
+        f.write('# brightblack, brightred, etc.\n')
+        f.write('info = brightgreen\n')
+        f.write('error = brightred\n')
+        f.write('instruction = brightmagenta\n')
+        f.write('side_of_card = brightyellow\n')
+        f.write('prompt = brightcyan\n')
+        f.write('silent_prompt = brightyellow\n')
 
     print_info('Created directory {}.'.format(garrick_dir))
     if default_editor == None:

@@ -13,7 +13,7 @@ $ cd garrick
 
 ### Todo
 * ~~Write install script~~
-* Improve the card selection algorithm (current algorithm is a proof of concept, though it works fine for one-way cards).
+* Improve the card selection algorithm (current algorithm is a proof of concept, though it works fine ~~for one-way cards~~).
 * ~~Allow easy editing and deleting of cards.~~
 * ~~Add a "single line mode", for entering cards with only one line on each side without the need to press Ctrl+D.~~
 * ~~Allow using other editors, not just vim.~~
@@ -28,5 +28,5 @@ $ cd garrick
 * ~~Fix encoding issues.~~
 * ~~Usage info.~~
 * User guide.
-* Major cleanup.
+* ~~Major cleanup.~~
 * 1.0 release ^^

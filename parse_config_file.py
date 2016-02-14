@@ -4,26 +4,6 @@ from load_config_file import locate_config_file
 from default_colors import default_print_info, default_print_error, default_print_instruction
 from colored_output import ColoredOutput
 
-def get_config():
-    
-    garrick_dir, config_file_name = locate_config_file()
-
-    config_file = os.path.join(garrick_dir, config_file_name)
-
-    config = configparser.ConfigParser(allow_no_value = True)
-
-    try:
-        config.read(config_file)
-    except Exception as exception:
-        default_print_error('Something is wrong with your config file.')
-        default_print_error('ConfigParser has thrown the following exception:')
-        print()
-        print(exception)
-        print()
-        write_example_config()
-
-    return config
-
 def write_example_config():
 
     garrick_dir, config_file_name = locate_config_file()
@@ -47,18 +27,38 @@ def write_example_config():
         f.write('pokemon.db\n\n')
         f.write('[config]\n')
         f.write('editor = vim\n')
-        f.write('\n# COLOURS')
-        f.write('# Available choices are:')
-        f.write('# black, red, green, yellow, blue, magenta, cyan, white,')
-        f.write('# brightblack, brightred, etc.')
-        f.write('info = brightgreen')
-        f.write('error = brightred')
-        f.write('instruction = brightmagenta')
-        f.write('side_of_card = brightyellow')
-        f.write('prompt = brightcyan')
-        f.write('silent_prompt = brightyellow')
+        f.write('\n# COLOURS\n')
+        f.write('# Available choices are:\n')
+        f.write('# black, red, green, yellow, blue, magenta, cyan, white,\n')
+        f.write('# brightblack, brightred, etc.\n')
+        f.write('info = brightgreen\n')
+        f.write('error = brightred\n')
+        f.write('instruction = brightmagenta\n')
+        f.write('side_of_card = brightyellow\n')
+        f.write('prompt = brightcyan\n')
+        f.write('silent_prompt = brightyellow\n')
 
     raise Exception('Invalid or incomplete config file.')
+
+def get_config():
+    
+    garrick_dir, config_file_name = locate_config_file()
+
+    config_file = os.path.join(garrick_dir, config_file_name)
+
+    config = configparser.ConfigParser(allow_no_value = True)
+
+    try:
+        config.read(config_file)
+    except Exception as exception:
+        default_print_error('Something is wrong with your config file.')
+        default_print_error('ConfigParser has thrown the following exception:')
+        print()
+        print(exception)
+        print()
+        write_example_config()
+
+    return config
 
 def parse_db_files():
 

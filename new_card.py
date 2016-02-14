@@ -1,19 +1,18 @@
 from card import Card
-from get_timestamp import get_timestamp
+from timestamps import get_timestamp
 from edit import edit
-from user_colors import print_info, print_side, print_instruction, colored_prompt, colored_getpass
+from user_colors import print_info, print_side, print_instruction, colored_prompt
 
 prompt = '] '
 
 def read_input(single_line_mode):
-
-    lines = []
 
     try:
         if single_line_mode:
             line = colored_prompt(prompt)
             return line
         else:
+            lines = []
             while True:
                 try:
                     line = colored_prompt(prompt)
@@ -47,10 +46,10 @@ def compose_in_editor(two_way_card):
         two_way_card = not two_way_card
 
     if selection == 'm':
-        return new_card(two_way_card, False, False)
+        return new_card(two_way_card, single_line_mode=False, editor_mode=False)
 
     if selection == 's':
-        return new_card(two_way_card, True, False)
+        return new_card(two_way_card, single_line_mode=True, editor_mode=False)
 
     else:
 

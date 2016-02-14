@@ -21,6 +21,6 @@ def pick_card(conn, cursor):
         else:
             score = 5
 
-        card = card_repository.select(cursor, score)
+        card = card_repository.select_one_by_score(cursor, score)
 
     return card
