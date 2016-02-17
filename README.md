@@ -35,7 +35,7 @@ Usage: garrick [COMMAND]
 Launching garrick without arguments starts a regular review session, provided that
 your card database isn't empty.
 
-If more than one database is referenced in the [databases] section of your config
+If more than one database is referenced in the [database_files] section of your config
 file, garrick will ask you which database to use before starting.
 
 Commands:
@@ -83,13 +83,13 @@ Alternatively, enter _o_ (for _options_) instead of a score. You can then enter 
 When you first run garrick, it creates a directory called _.garrick_ in your home directory, which initially contains just the configuration file _garrick.conf_.
 
 Use this config file to
-- add one or more new database(s). Any newly added database listed in the [databases] section (one DB name per line) will be created the next time you run garrick. It is stored inside a file with the name you have given it in _garrick.conf_, which garrick writes into the _.garrick_ directory. By default, the config file lists one database named "garrick.db".
+- add one or more new database(s). Any newly added database listed in the [database_files] section (one DB name per line) will be created the next time you run garrick. It is stored inside a file with the name you have given it in _garrick.conf_, which garrick writes into the _.garrick_ directory. By default, the config file lists one database named "garrick.db".
 - set your text editor. If your EDITOR environment variable is set at the time _garrick.conf_ is created, garrick automatically sets that as your editor in the config file. If you later try to edit a card or write a new card in editor mode, and no editor is set in _garrick.conf_, garrick will still look up your EDITOR environment variable and use that if it's set.
 - set the colours for garrick's different types of output. The available choices are listed in a comment inside _garrick.conf_.
 
 To rename a database:
 - Rename the actual file (found in the _.garrick_ directory).
-- Change the entry in _garrick.conf_'s [databases] section to match the new filename.
+- Change the entry in _garrick.conf_'s [database_files] section to match the new filename.
 
 If you mess up your config file and garrick finds it unusable, it copies _garrick.conf.example_ into the _.garrick_ directory to show you how it's done. If you want to get your copy of that file even though your _garrick.conf_ causes no error, one way of getting it is to deliberately break your config file, e.g. by deleting one of the section headers.
 
