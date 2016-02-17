@@ -139,6 +139,6 @@ This need not ruin your garrick experience in any way, and it remains useful as 
 * ~~Make colours user-definable.~~
 * ~~Fix encoding issues.~~
 * ~~Usage info.~~
-* User guide.
+* ~~User guide.~~
 * ~~Major cleanup.~~
 * 1.0 release ^^
