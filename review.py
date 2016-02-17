@@ -81,7 +81,6 @@ def iterate(conn, cursor, iterator, count):
                             card_repository.insert_flipped_card(conn, cursor, updated_card)
                         else:
                             bump_flipped_card_timestamp(conn, cursor, card)
-                        print_info('Edited.')
                         print_instruction('Create another version based on this same card?')
                         print_info('Protip: This is how you split one card into several cards.')
                         while True:
