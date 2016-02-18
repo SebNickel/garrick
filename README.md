@@ -56,7 +56,7 @@ Commands:
 ##### <a name="creating"></a>Creating cards
 
 Cards can be created using various "modes", some of which can mix and match.
-- **Normal multi-line mode** (default): Hitting Enter opens a new line on the present side of a card. Ctrl+D finishes the current side.
+- **Normal multi-line mode** (default): Hitting Enter saves the current line to the current side of the card and opens a new line. Ctrl+D finishes the current side.
 - **Single-line mode**: Hitting Enter finishes the current side of the card.
 - **Editor mode**: Enter new cards using a text editor. Saving and quitting the editor saves the card. You're then presented with a menu. Simply hitting Enter reopens the editor so you can write the next card.
 - **One-way mode** (default): Creates one-way cards. (See below.)
@@ -103,7 +103,7 @@ The current card selection algorithm remains little more than a proof of concept
 The most obvious goal for future releases is to replace it with one or more good algorithm(s). 
 E.g. the SM-17 algorithm is a popular choice, and is described [here](http://www.supermemopedia.com/wiki/Algorithm_SM-17).
 
-(Note that the app provides several ways of browsing through cards that do not rely on the flawed algorithm.)
+(Note that garrick provides several ways of browsing through cards that do not rely on the flawed algorithm.)
 
 In the current implementation:
 - Each card has a score and a _last\_viewed_ entry.
