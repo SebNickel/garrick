@@ -72,7 +72,7 @@ You can choose the modes in which card creation begins by choosing the appropria
 
 Start a "regular review" (using the current flawed algorithm, as described [below](#algorithm)) by running "garrick" without arguments, and then selecting a database if you have more than one.
 
-Alternatively, run garrick with one of the various options beginning with _b_ to browse your cards by one of the available criteria. Garrick will prompt you for a regular expression or a score if this is the criterion you've chosen.
+Alternatively, run garrick with one of the various options beginning with _b_ to browse your cards by one of the available criteria. Garrick will prompt you for a regular expression or a score if this is the criterion you've chosen. The cards will be presented in the order of their _last\_viewed_ timestamps, or in reverse order if you used the -br option.
 
 After that, the interface is the same in any case: Garrick displays the front of a card, and waits until you hit Enter. It then displays the back of the card, and asks you to score yourself from 0 to 5. The higher the score, the less likely garrick should be to show you that card in the future. (But see [below](#algorithm).)
 
