@@ -56,7 +56,7 @@ Commands:
 ##### <a name="creating"></a>Creating cards
 
 Cards can be created using various "modes", some of which can mix and match.
-- **Normal multi-line mode** (default): Hitting Enter opens a new line on the present side of a card. Ctrl+D finishes the current side.
+- **Normal multi-line mode** (default): Hitting Enter saves the current line to the current side of the card and opens a new line. Ctrl+D finishes the current side.
 - **Single-line mode**: Hitting Enter finishes the current side of the card.
 - **Editor mode**: Enter new cards using a text editor. Saving and quitting the editor saves the card. You're then presented with a menu. Simply hitting Enter reopens the editor so you can write the next card.
 - **One-way mode** (default): Creates one-way cards. (See below.)
@@ -83,7 +83,7 @@ Alternatively, enter _o_ (for _options_) instead of a score. You can then enter 
 When you first run garrick, it creates a directory called _.garrick_ in your home directory, which initially contains just the configuration file _garrick.conf_.
 
 Use this config file to
-- add one or more new database(s). Any newly added database listed in the [database_files] section (one DB name per line) will be created the next time you run garrick. It is stored inside a file with the name you have given it in _garrick.conf_, which garrick writes into the _.garrick_ directory. By default, the config file lists one database named "garrick.db".
+- add one or more new database(s). Any newly added database listed in the [database_files] section (one DB name per line) will be created the next time you run garrick. It is stored inside a file with the name you have given it in _garrick.conf_, which garrick writes into the _.garrick_ directory. By default, the config file lists one database named "cards.db".
 - set your text editor. If your EDITOR environment variable is set at the time _garrick.conf_ is created, garrick automatically sets that as your editor in the config file. If you later try to edit a card or write a new card in editor mode, and no editor is set in _garrick.conf_, garrick will still look up your EDITOR environment variable and use that if it's set.
 - set the colours for garrick's different types of output. The available choices are listed in a comment inside _garrick.conf_.
 
@@ -103,7 +103,7 @@ The current card selection algorithm remains little more than a proof of concept
 The most obvious goal for future releases is to replace it with one or more good algorithm(s). 
 E.g. the SM-17 algorithm is a popular choice, and is described [here](http://www.supermemopedia.com/wiki/Algorithm_SM-17).
 
-(Note that the app provides several ways of browsing through cards that do not rely on the flawed algorithm.)
+(Note that garrick provides several ways of browsing through cards that do not rely on the flawed algorithm.)
 
 In the current implementation:
 - Each card has a score and a _last\_viewed_ entry.
