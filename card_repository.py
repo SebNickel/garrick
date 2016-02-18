@@ -83,6 +83,7 @@ def select_by_regex(cursor, regex):
         FROM cards
         WHERE MATCHES(?, front)
         OR MATCHES(?, back)
+        ORDER BY last_viewed
     """
 
     cursor.execute(query, (regex, regex))
@@ -97,6 +98,7 @@ def select_by_regex_front(cursor, regex):
         SELECT *
         FROM cards
         WHERE MATCHES(?, front)
+        ORDER BY last_viewed
     """
 
     cursor.execute(query, (regex,))
@@ -111,6 +113,7 @@ def select_by_regex_back(cursor, regex):
         SELECT *
         FROM cards
         WHERE MATCHES(?, back)
+        ORDER BY last_viewed
     """
 
     cursor.execute(query, (regex,))
@@ -125,6 +128,7 @@ def select_by_score(cursor, score):
         SELECT *
         FROM cards
         WHERE score = ?
+        ORDER BY last_viewed
     """
 
     cursor.execute(query, (score,))

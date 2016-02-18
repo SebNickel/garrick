@@ -71,7 +71,7 @@ def parse_db_files():
             'Error: No databases are listed in your config file.'
         )
         default_print_instruction(
-            'Write a name for a database file into its [database_file] section.'
+            'Write a name for a database file into its [database_files] section.'
         )
         default_print_info('This file will be created the next time you run garrick,')
         default_print_info('or it will be used if it already exists.')
